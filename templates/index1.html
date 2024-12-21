@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Price Predictor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('/static/images/laptop-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            margin-left: 32%; /* Slightly move container to the left */ /* Move container to a reasonable right shift */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #03dac6;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: rgba(50, 50, 50, 0.9);
+            color: #ffffff;
+            box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            grid-column: span 3;
+            background-color: #03dac6;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #018786;
+        }
+
+        .prediction {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Laptop Price Predictor</h1>
+        <form action="/predict" method="post" class="form-grid">
+
+            <div>
+                <label for="Company">Company:</label>
+                <select name="Company" id="Company">
+                    <option value="Apple">Apple</option>
+                    <option value="Dell">Dell</option>
+                    <option value="HP">HP</option>
+                    <option value="Lenovo">Lenovo</option>
+                    <option value="Asus">Asus</option>
+                    <option value="Acer">Acer</option>
+                    <option value="MSI">MSI</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="TypeName">Type:</label>
+                <select name="TypeName" id="TypeName">
+                    <option value="Ultrabook">Ultrabook</option>
+                    <option value="Notebook">Notebook</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="2-in-1">2-in-1</option>
+                    <option value="Workstation">Workstation</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="Ram">RAM (GB):</label>
+                <select name="Ram" id="Ram">
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                    <option value="64">64</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="Weight_Category">Weight Category:</label>
+                <select name="Weight_Category" id="Weight_Category">
+                    <option value="Light">Light</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Heavy">Heavy</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="Cpu_brand">CPU Brand:</label>
+                <select name="Cpu_brand" id="Cpu_brand">
+                    <option value="Intel Core i3">Intel Core i3</option>
+                    <option value="Intel Core i5">Intel Core i5</option>
+                    <option value="Intel Core i7">Intel Core i7</option>
+                    <option value="AMD Ryzen 5">AMD Ryzen 5</option>
+                    <option value="AMD Ryzen 7">AMD Ryzen 7</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="HDD">HDD (GB):</label>
+                <select name="HDD" id="HDD">
+                    <option value="0">0</option>
+                    <option value="256">256</option>
+                    <option value="512">512</option>
+                    <option value="1024">1024</option>
+                    <option value="2000">2000</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="SSD">SSD (GB):</label>
+                <select name="SSD" id="SSD">
+                    <option value="0">0</option>
+                    <option value="128">128</option>
+                    <option value="256">256</option>
+                    <option value="512">512</option>
+                    <option value="1024">1024</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="Gpu_brand">GPU Brand:</label>
+                <select name="Gpu_brand" id="Gpu_brand">
+                    <option value="Intel">Intel</option>
+                    <option value="AMD">AMD</option>
+                    <option value="Nvidia">Nvidia</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="Os">Operating System:</label>
+                <select name="Os" id="Os">
+                    <option value="Windows">Windows</option>
+                    <option value="Mac">Mac</option>
+                    <option value="Linux">Linux</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="prediction">
+            <h2>{{ prediction_text }}</h2>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <p>By - Ronak Avinash Jain - FT251067</p>
+        </div>
+    </div>
+</body>
+</html>
