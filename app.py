@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 
 # Load the trained model
-model = pickle.load(open('D:/GLIM/Term5/Predictivie Aalytics Lab 2/laptop/models/model.pkl', 'rb'))
+model = pickle.load(open('models/model.pkl', 'rb'))
 
 app = Flask(__name__)
 
